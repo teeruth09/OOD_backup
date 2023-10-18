@@ -1,0 +1,71 @@
+class Stack:
+    def __init__(self) -> None:
+        self.list = []
+    
+    def push(self,data):
+        self.list.append(data)
+    
+    def pop(self):
+        return self.list.pop()
+    
+    def __str__(self):
+        answer = ''
+        if self.list is not None:
+            for i in self.list:
+                answer +=i
+            return answer
+
+
+class Node:
+    def __init__(self, data) -> None:
+        self.data = data
+        self.left = None
+        self.right = None
+
+class BST:
+    def __init__(self) -> None:
+        self.root = None
+        self.d = {}  # Create an empty dictionary to keep track of nodes
+        self.stack = Stack()
+
+    def insert(self, root, leaf):
+        if root not in self.d:
+            self.d[root] = Node(root)
+        if leaf not in self.d:
+            self.d[leaf] = Node(leaf)
+
+        if self.d[root].left is None:
+            self.d[root].left =self.d[leaf]
+        else:
+            self.d[root].right = self.d[leaf]
+
+    def printTree(self, node, level=0):
+        if node is not None:
+            self.printTree(node.right, level + 1)
+            print('     ' * level, str(node.data))
+            self.printTree(node.left, level + 1)
+    
+    def searchleft(self,root):
+        pass
+
+
+s1 = Stack()
+# Create an empty binary search tree
+bst = BST()
+
+# Get input from the user
+inp = [x for x in input("Enter Input : ").split(",")]
+top = inp[0][0]
+
+# Process each input pair
+for i in inp:
+    data = i.split()
+    root = data[0]
+    leaf = data[1]
+
+    # Insert the data into the binary search tree
+    bst.insert(root,leaf)
+
+# Print the binary tree with proper indentation
+bst.printTree(bst.d[top])
+    

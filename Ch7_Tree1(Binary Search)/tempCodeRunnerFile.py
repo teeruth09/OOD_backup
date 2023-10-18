@@ -1,0 +1,1 @@
+print(f'Top view : {" ".join(answer)}')
